@@ -1,0 +1,21 @@
+#ignore folders
+css/
+image/
+js/
+lib/
+xampp/
+dashboard/
+wordpress/
+upload/
+
+
+
+#ignore files
+all.sublime-project
+applications.html
+bitnami.css
+favicon.ico
+index.php
+*.log
+*.sublime-workspace
+
