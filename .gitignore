@@ -1,21 +1,10 @@
 #ignore folders
-css/
-image/
-js/
-lib/
-xampp/
-dashboard/
-wordpress/
+__pycache__/
 upload/
 
 
 
 #ignore files
-all.sublime-project
-applications.html
-bitnami.css
-favicon.ico
-index.php
 *.log
 *.sublime-workspace
 
