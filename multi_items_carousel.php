@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
   <style>
 	.multi-item-carousel{
 	  .carousel-inner{
@@ -37,7 +38,7 @@
 	      }
 	    }
 	  }
-	  .carouse-control{
+	  .carousel-control{
 	    &.left, &.right{
 	      background-image: none;
 	    }
@@ -59,16 +60,44 @@
 	}  	
   </style>
 
+<script>
+
+$(document).ready(function(){
+	// Instantiate the Bootstrap carousel
+	$('.carousel').carousel({
+	  interval: false,
+	 
+	});
+
+	// for every slide in carousel, copy the next slide's item in the slide.
+	// Do the same for the next, next item.
+	$('.multi-item-carousel .item').each(function(){
+	  var next = $(this).next();
+	  if (!next.length) {
+	    next = $(this).siblings(':first');
+	  }
+	  next.children(':first-child').clone().appendTo($(this));
+	  
+	  if (next.next().length>0) {
+	    next.next().children(':first-child').clone().appendTo($(this));
+	  } else {
+	  	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+	  }
+	});  	
+
+});
+</script>
 </head>
 <body>
+
 	<div class="container">
   <h1>Use Bootstrap 3's carousel to show multiple items per slide.</h1>
   <div class="row">
     <div class="col-md-12">
-      <div class="carousel slide multi-item-carousel" id="theCarousel">
+      <div class="carousel slide multi-item-carousel" id="theCarousel" >
         <div class="carousel-inner">
           <div class="item active">
-            <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?perth,australia" class="img-responsive"></a>   
+            <div class="col-xs-4"><a href="#1"><img src="Sample%20Pictures/Chrysanthemum.jpg" class="img-responsive"></a>   
             	<div class="carousel-caption">
 	          		<h3>1</h3>
 	            </div>
@@ -79,7 +108,7 @@
 
 
           <div class="item">
-            <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?fremantle,australia" class="img-responsive"></a>
+            <div class="col-xs-4"><a href="#1"><img src="Sample%20Pictures/Desert.jpg" class="img-responsive"></a>
 
             	<div class="carousel-caption">
 	          		<h3>2</h3>
@@ -93,7 +122,7 @@
 
           </div>
           <div class="item">
-            <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?west-australia" class="img-responsive"></a>
+            <div class="col-xs-4"><a href="#1"><img src="Sample%20Pictures/Hydrangeas.jpg" class="img-responsive"></a>
 
             	<div class="carousel-caption">
 	          		<h3>3</h3>
@@ -107,7 +136,7 @@
 
           </div>
           <div class="item">
-            <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?perth" class="img-responsive"></a>
+            <div class="col-xs-4"><a href="#1"><img src="Sample%20Pictures/Jellyfish.jpg" class="img-responsive"></a>
 
            		<div class="carousel-caption">
 	          		<h3>4</h3>
@@ -116,7 +145,7 @@
             </div>
           </div>
           <div class="item">
-            <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?quokka,perth" class="img-responsive"></a>
+            <div class="col-xs-4"><a href="#1"><img src="Sample%20Pictures/Koala.jpg" class="img-responsive"></a>
 
 
            		<div class="carousel-caption">
@@ -132,7 +161,7 @@
 
           </div>
           <div class="item">
-            <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?margaretriver,australia" class="img-responsive"></a>
+            <div class="col-xs-4"><a href="#1"><img src="Sample%20Pictures/Lighthouse.jpg" class="img-responsive"></a>
 
            		<div class="carousel-caption">
 	          		<h3>6</h3>
@@ -146,7 +175,7 @@
           <!-- Example item start:  -->
           
           <div class="item">
-            <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?perth,australia&r=7" class="img-responsive"></a>
+            <div class="col-xs-4"><a href="#1"><img src="Sample%20Pictures/Penguins.jpg" class="img-responsive"></a>
 
            		<div class="carousel-caption">
 	          		<h3>7</h3>
@@ -163,27 +192,6 @@
     </div>
   </div>
 </div>
-<script>
-// Instantiate the Bootstrap carousel
-$('.multi-item-carousel').carousel({
-  interval: false
-});
 
-// for every slide in carousel, copy the next slide's item in the slide.
-// Do the same for the next, next item.
-$('.multi-item-carousel .item').each(function(){
-  var next = $(this).next();
-  if (!next.length) {
-    next = $(this).siblings(':first');
-  }
-  next.children(':first-child').clone().appendTo($(this));
-  
-  if (next.next().length>0) {
-    next.next().children(':first-child').clone().appendTo($(this));
-  } else {
-  	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-  }
-});  	
-</script>
 </body>
 </html>
