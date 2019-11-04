@@ -219,7 +219,7 @@ $(document).ready(function(){
 
     if (selectvalue != "") {
       selectvalue = selectvalue + "&form_code=<?php echo $form_code ?>";
-      $.ajax({url: '../lib/ajax_check_email.php?email='+selectvalue,
+      $.ajax({url: 'ajax_check_email.php?email='+selectvalue,
       success: function(output) {
         // alert(output);
   // output = 'OOOOKKKK';

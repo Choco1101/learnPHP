@@ -1,7 +1,7 @@
-<script type="text/javascript" src="jcarousel/vendor/jquery/jquery.js"></script>
-<script type="text/javascript" src="jcarousel/dist/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="../jcarousel/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="../jcarousel/dist/jquery.jcarousel.min.js"></script>
 
-<script type="text/javascript" src="jcarousel/examples/responsive/jcarousel.responsive.js "></script>
+<script type="text/javascript" src="../jcarousel/examples/responsive/jcarousel.responsive.js "></script>
 
 <style>
  
@@ -142,12 +142,12 @@
     <div class="jcarousel-wrapper" >
         <div class="jcarousel">
             <ul>
-                <li><img src="jcarousel/examples/_shared/img/img1.jpg" alt="Image 1" class="hover-shadow"></li>
-                <li><img src="jcarousel/examples/_shared/img/img2.jpg" alt="Image 2"  class="hover-shadow"></li>
-                <li><img src="jcarousel/examples/_shared/img/img3.jpg" alt="Image 3"  class="hover-shadow"></li>
-                <li><img src="jcarousel/examples/_shared/img/img4.jpg" alt="Image 4"  class="hover-shadow"></li>
-                <li><img src="jcarousel/examples/_shared/img/img5.jpg" alt="Image 5"  class="hover-shadow"></li>
-                <li><img src="jcarousel/examples/_shared/img/img6.jpg" alt="Image 6"  class="hover-shadow"></li>
+                <li><img src="../jcarousel/examples/_shared/img/img1.jpg" alt="Image 1" class="hover-shadow"></li>
+                <li><img src="../jcarousel/examples/_shared/img/img2.jpg" alt="Image 2"  class="hover-shadow"></li>
+                <li><img src="../jcarousel/examples/_shared/img/img3.jpg" alt="Image 3"  class="hover-shadow"></li>
+                <li><img src="../jcarousel/examples/_shared/img/img4.jpg" alt="Image 4"  class="hover-shadow"></li>
+                <li><img src="../jcarousel/examples/_shared/img/img5.jpg" alt="Image 5"  class="hover-shadow"></li>
+                <li><img src="../jcarousel/examples/_shared/img/img6.jpg" alt="Image 6"  class="hover-shadow"></li>
             </ul>
         </div>
 
