@@ -1,7 +1,9 @@
 <?php 
 
-$form_code = "";
+$form_code = "123";
 $for_testing  = true;
+
+
 
 ?>
 
@@ -141,7 +143,7 @@ $for_testing  = true;
 
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php" method="post">
+  <form class="modal-content animate" name="myForm" action="eForm_submit.php" method="post" enctype="multipart/form-data">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="" alt="Avatar" class="avatar">
@@ -149,18 +151,18 @@ $for_testing  = true;
 
     <div class="container">
       <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" id="uname" maxlength="50" required>
+      <input type="text" placeholder="Enter Username" name="uname" id="uname" maxlength="50" value="<?php echo (isset($_COOKIE['remember_uname'])? $_COOKIE['remember_uname']:''); ?>" required>
       <div id="uname_error" class="error_hide">Required field</div>
 
 
       <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" id="email" maxlength="100" required>
+      <input type="text" placeholder="Enter Email" name="email" id="email" maxlength="100" value="<?php echo (isset($_COOKIE['remember_email'])? $_COOKIE['remember_email']:''); ?>" required>
       <div id="email_error" class="error_hide">Required field / Invalid Format</div>
-       <div id="email_dulicate" class="error_hide">This email address has been registered. 這個電郵地址已成功登記</div>
+       
 
 
       <label for="tel"><b>Contact No.</b></label>
-      <input type="text" placeholder="Enter Phone Number" name="tel" id="tel" maxlength="50" required>
+      <input type="text" placeholder="Enter Phone Number" name="tel" id="tel" maxlength="50" value="<?php echo (isset($_COOKIE['remember_tel'])? $_COOKIE['remember_tel']:''); ?>" required>
       <div id="tel_error" class="error_hide">Required field</div>
      
 
@@ -201,24 +203,42 @@ $(document).ready(function(){
     }
   });  
 
-//      check email address whether has registrated or not    
-  var selectvalue = $("#email").val();
 
-  if (selectvalue != "") {
-    selectvalue = selectvalue + "&form_code=<?php echo $form_code ?>";
-    $.ajax({url: '../lib/ajax_check_email.php?email='+selectvalue,
-    success: function(output) {
-      alert(output);
-// output = 'OOOOKKKK';
-      if (output == 'OOOOKKKK') {
-        $("#email_dulicate").show();
-        // alert('This email address has been registered. \n這個電郵地址已成功登記');
-      } 
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-      alert(xhr.status + " "+ thrownError);
-    }});
-  }
+
+  $("#email").focus(function() {
+    $("#email_error").hide();
+    $("#email_error").html("Required field");
+    
+  });
+
+
+//      check email address whether has registrated or not    
+  $("#tel").blur(function(){ 
+
+    var selectvalue = $("#email").val();
+
+    if (selectvalue != "") {
+      selectvalue = selectvalue + "&form_code=<?php echo $form_code ?>";
+      $.ajax({url: '../lib/ajax_check_email.php?email='+selectvalue,
+      success: function(output) {
+        // alert(output);
+  // output = 'OOOOKKKK';
+        if (output == 'OOOOKKKK') {
+          $("#email_dulicate").text("This email address has been registered. 這個電郵地址已成功登記");
+          $("#email_dulicate").show();
+
+        } 
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status + " "+ thrownError);
+      }});
+    }
+
+  });
+
+
+
+
 
 
 
@@ -241,10 +261,10 @@ $(document).ready(function(){
         // alert(output);
   // output = 'OOOOKKKK';
         if (output == 'OOOOKKKK') {
-          $("#tel_error").html("<font color=red>This Contact No. has been registered. 這個聯繫電話已成功登記</font>");
+          $("#tel_error").text("This Contact No. has been registered. 這個聯繫電話已成功登記");
           $("#tel_error").show();
 
-          // alert('This email address has been registered. \n這個電郵地址已成功登記');
+
         } 
       },
       error: function (xhr, ajaxOptions, thrownError) {
@@ -268,52 +288,60 @@ window.onclick = function(event) {
 }
 
 
-  function validateForm() {
+function validateForm() {
+
+  $("#uname_error").hide();
+  $("#tel_error").hide();
+  $("#email_error").hide();
+
+
+
+  // email 
+  var w_return = true;
+  var x = document.forms["myForm"]["email"].value;
+  var atpos = x.indexOf("@");
+  var dotpos = x.lastIndexOf(".");  
+
+
+
+
   
-    $("#uname_error").hide();
-    $("#tel_error").hide();
-    $("#email_error").hide();
+  if ($("#uname").val() == "") {
+   w_return = false; $("#uname_error").show();
+  }
+
+  if ($("#tel").val() == "" || $("#tel_error").html().indexOf("成功登記") >0) {
+   w_return = false;  $("#tel_error").show();
+  }
+
+
+  if (x.length=0 || atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)  {
+    w_return = false;
+    $("#email_error").show();
+  }
+
+  if ($("#email_error").html().indexOf("email")>0) 
+
+    { w_return = false;}      
 
 
 
-    // email 
-    var w_return = true;
-    var x = document.forms["myForm"]["email"].value;
-    var atpos = x.indexOf("@");
-    var dotpos = x.lastIndexOf(".");  
 
 
 
 
+  if (w_return === true)  {
+    myForm.submit();
     
-    if ($("#uname").val() == "") {
-     w_return = false; $("#uname_error").show();
+  } else {
+        alert("error");
+
+
     }
-
-    if ($("#tel").val() == "" || $("#tel_error").html().indexOf("成功登記") != -1 ) {
-     w_return = false;  $("#tel_error").show();
-    }
-  
-
-    if (x.length=0 || atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)  {
-      w_return = false;
-      $("#email_error").show();
-    }
-
-    if ($("#email_pass").html().indexOf("email")>0) 
-
-      { w_return = false;}      
+}
+    
 
 
-
-
-
-
-
-    if (w_return === true)  {
-      myForm.submit();
-      
-    }
 
 </script>
 
